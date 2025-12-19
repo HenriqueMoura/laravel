@@ -1,47 +1,97 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/vue3';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard().url,
-    },
-];
+import DetachedLayout from '@/layouts/DetachedLayout.vue';
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div
-            class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
-        >
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
+    <DetachedLayout title="Dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Dashboard</h4>
                 </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-            </div>
-            <div
-                class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
-            >
-                <PlaceholderPattern />
             </div>
         </div>
-    </AppLayout>
+
+        <div class="row">
+            <div class="col-md-6 col-xl-3">
+                <div class="widget-rounded-circle card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
+                                    <i class="fe-heart font-22 avatar-title text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <h3 class="text-dark mt-1">$<span data-plugin="counterup">58,947</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Total Revenue</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="widget-rounded-circle card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                                    <i class="fe-shopping-cart font-22 avatar-title text-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Today's Sales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="widget-rounded-circle card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                    <i class="fe-bar-chart-line- font-22 avatar-title text-info"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%</h3>
+                                    <p class="text-muted mb-1 text-truncate">Conversion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="widget-rounded-circle card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                    <i class="fe-eye font-22 avatar-title text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
+                                    <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </DetachedLayout>
 </template>

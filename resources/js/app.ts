@@ -16,8 +16,17 @@ createInertiaApp({
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
         createApp({ render: () => h(App, props) })
-            .use(plugin)
+            .use(plugin, {
+                transform: (request: any) => {
+                    if (csrfToken) {
+                        request.headers['X-CSRF-TOKEN'] = csrfToken;
+                    }
+                    return request;
+                }
+            })
             .mount(el);
     },
     progress: {

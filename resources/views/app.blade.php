@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<script src="assets/js/head.js"></script>
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="app-style">
@@ -15,4 +16,8 @@
     <body class="font-sans antialiased">
         @inertia
     </body>
+
+    <script src="assets/js/head.min.js"></script>
+    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/app.min.js"></script>
 </html>

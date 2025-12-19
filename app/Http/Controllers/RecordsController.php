@@ -16,16 +16,42 @@ class RecordsController extends Controller
 {
     public function index(): Response|JsonResponse
     {
-        $records = Record::with(['category', 'creator'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $query = Record::with(['category', 'creator'])
+            ->search(request('search'))
+            ->status(request('status'))
+            ->category(request('category_id'))
+            ->orderBy('created_at', 'desc');
+
+        $perPage = request('per_page', 15);
+        $records = $query->paginate($perPage);
 
         if (request()->expectsJson()) {
-            return response()->json(['data' => $records]);
+            return response()->json([
+                'data' => $records->items(),
+                'pagination' => [
+                    'current_page' => $records->currentPage(),
+                    'last_page' => $records->lastPage(),
+                    'per_page' => $records->perPage(),
+                    'total' => $records->total(),
+                ],
+                'filters' => [
+                    'search' => request('search'),
+                    'status' => request('status'),
+                    'category_id' => request('category_id'),
+                ],
+            ]);
         }
+
+        $categories = Category::all();
 
         return Inertia::render('tickets/index', [
             'records' => $records,
+            'categories' => $categories,
+            'filters' => [
+                'search' => request('search'),
+                'status' => request('status'),
+                'category_id' => request('category_id'),
+            ],
         ]);
     }
 
@@ -54,7 +80,7 @@ class RecordsController extends Controller
             return response()->json($record, 201);
         }
 
-        return redirect()->route('tickets.show', $record);
+        return redirect()->route('tickets.index');
     }
 
     public function show(Record $record): Response
