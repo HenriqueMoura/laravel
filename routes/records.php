@@ -8,6 +8,6 @@ Route::middleware('auth')->group(function () {
   Route::resource('tickets', RecordsController::class);
 });
 
-Route::prefix('api')->middleware(['auth'])->group(function () {
+Route::prefix('api')->name('api.')->middleware(['auth'])->group(function () {
   Route::apiResource('tickets', RecordController::class);
 });
